@@ -1,0 +1,27 @@
+{
+  "name": "com.pass",
+  "version": "1.0.0",
+  "description": "Дубликат задачи «Создание и настройка проекта микро-сервиса \"Учет посетителей\"»",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "type": "commonjs",
+  "keywords": [
+    "node.js",
+    "express",
+    "mongodb"
+  ],
+  "author": "Daniil Chernousov",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "express-handlebars": "^7.0.7",
+    "mongoose": "^7.3.4",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

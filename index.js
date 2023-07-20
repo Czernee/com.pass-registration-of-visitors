@@ -1,36 +1,24 @@
-const express = require('express')
-const mongoose = require('mongoose')
-const path = require('path')
-const Client = require('./models/Client.js')
+const dotenv = require('dotenv').config();
+const express = require('express');
+const { createConnection } = require('typeorm');
 
 const app = express()
-const PORT = process.env.PORT || 3000
 
-app.use(express.static(path.join(__dirname)));
+const PORT = 3000
 
-mongoose.connect('mongodb://127.0.0.1/test')
-    .then(() => console.log("MongoDB connected."))
-    .catch(err => console.log(err)) 
+createConnection({
+  type: process.env.DATABASE_TYPE,
+  host: process.env.POSTGRES_HOST,
+  port: process.env.POSTGRES_PORT,
+  username: process.env.POSTGRES_USER,
+  password: process.env.POSTGRES_PASSWORD,
+  database: process.env.POSTGRES_DB,
+  synchronize: true,
+  logging: true,
+}).then(connection => {
 
-app.listen(PORT, () => {
-    console.log("Server has been started...")
-})    
-
-app.get('/', (req, res) => {
-    res.send('Hello world!')
-    console.log('GET request received')
-});
-
-app.post('/', (req, res) => {
-    console.log('POST method')
+  app.listen(PORT, () => console.log("Server has been started on port " + PORT))
+  
+}).catch(error => {
+  console.log("Database connection error:", error)
 })
-
-app.get('/creation', (req, res) => {
-    res.sendFile(path.join(__dirname, 'creation.html'))
-})
-
-app.post('/creation', (req, res) => {
-
-});
-
-

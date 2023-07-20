@@ -4,10 +4,12 @@
   "description": "Дубликат задачи «Создание и настройка проекта микро-сервиса \"Учет посетителей\"»",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+    "prod:start": "npm run build && node build/app.js",
+    "dev:server": "npx nodemon",
+    "build": "npm run test && rimraf ./build && npx tsc",
+    "test": "jest --passWithNoTests"
   },
-  "type": "commonjs",
+  "type": "module",
   "keywords": [
     "node.js",
     "express",
@@ -28,6 +30,13 @@
     "typeorm": "^0.3.17"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1"
+    "@types/express": "^4.17.17",
+    "@types/node": "^20.4.2",
+    "dotenv": "^16.3.1",
+    "nodemon": "^3.0.1",
+    "prettier": "^3.0.0",
+    "rimraf": "^5.0.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.6"
   }
 }

@@ -1,4 +1,3 @@
 node_modules
-models
-creation.html
-index.js
+.env
+database.sql

@@ -9,6 +9,11 @@
     "lib": [
     "ES6"
     ],
+<<<<<<< HEAD
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+=======
+>>>>>>> origin/dev
     "removeComments": true,
     "outDir": "./build",
     "sourceMap": true,
@@ -30,5 +35,9 @@
     "build",
     "**/*.test.ts"
     ]
+<<<<<<< HEAD
+}
+=======
     }
+>>>>>>> origin/dev
     

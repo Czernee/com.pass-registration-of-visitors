@@ -6,7 +6,7 @@ export class Client {
     id: number;
 
     @Column()
-    fullName: string;
+    fullname: string;
 
     @Column()
     passport: String;

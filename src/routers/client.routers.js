@@ -8,9 +8,9 @@ clientRouter.get('/user/:id', clientController.getOneClient);
 
 clientRouter.post('/user',
   [
-    check('fullName', 'Длина имени должна быть не менее 1 символа').isLength({ min: 1 }),
-    check('passport', 'Некорректно введены паспортные данные').isPassportNumber(),
-    check('phone', 'Некорректно введен номер телефона').isMobilePhone() 
+    check('fullname', 'Длина имени должна быть не менее 1 символа').isLength({ min: 1 }),
+    check('passport', 'Некорректно введены паспортные данные').isPassportNumber('RU'),
+    check('phone', 'Некорректно введен номер телефона').isMobilePhone()
   ],
   (req, res) => {
     const errors = validationResult(req);
@@ -24,9 +24,12 @@ clientRouter.post('/user',
 
 clientRouter.patch('/user',
   [
-    check('fullName', 'Длина имени должна быть не менее 1 символа').isLength({ min: 1 }),
-    check('passport', 'Некорректно введены паспортные данные').isPassportNumber(),
-    check('phone', 'Некорректно введен номер телефона').isMobilePhone()
+    check('fullname', 'Длина имени должна быть не менее 1 символа').isLength({ min: 1 }).optional(),
+    check('passport', 'Некорректно введены паспортные данные').isPassportNumber('RU').optional(),
+    check('phone', 'Некорректно введен номер телефона').isMobilePhone().optional(),
+    check('room').optional(),
+    check('arrival').optional(),
+    check('departure').optional()
   ],
   (req, res) => {
     const errors = validationResult(req);
@@ -38,6 +41,6 @@ clientRouter.patch('/user',
   }
 )
 
-export default clientRouter
+export default clientRouter 
 
 

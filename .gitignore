@@ -1,11 +1,7 @@
 node_modules
-<<<<<<< HEAD
 .env
+.idea
 database.sql
-=======
 models
 creation.html
-.env
 index.js
-.env
->>>>>>> origin/dev

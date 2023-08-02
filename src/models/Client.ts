@@ -6,16 +6,16 @@ export class Client {
     id: number;
 
     @Column()
-    fullName: string;
+    fullname: string;
 
     @Column()
-    passport: String;
+    passport: string;
 
     @Column()
-    phone: String;
+    phone: string;
 
     @Column()
-    room: String;
+    room: string;
 
     @Column()
     arrival: Date;

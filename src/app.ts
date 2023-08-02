@@ -1,6 +1,15 @@
 import 'dotenv/config.js'
 import express from 'express'
 import { DataSource } from "typeorm"
+
+import { Client } from "./models/Client.js"
+import clientController from './controllers/client.controller.js'
+import clientRouter from './routers/client.routers.js'
+
+const app = express()
+app.use(express.json())
+app.use('/api', clientRouter)
+
 import {Client} from "./models/Client.js"
 
 const app = express()
@@ -27,5 +36,4 @@ AppDataSource.initialize()
 
 app.listen(PORT, () => console.log("Server has been started on port " + PORT))
 
-
-
+export default AppDataSource

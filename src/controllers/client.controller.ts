@@ -9,17 +9,21 @@ class clientController {
       }
     
     async getOneClient(req, res) {
-    try {
-        const user = await clientService.getOneClient(req.params.id)
-        res.json(user)
-    } catch (e) {
-        res.status(500).json({message: e.message})
-        }
+        try {
+            const user = await clientService.getOneClient(req.params.id)
+            res.json(user)
+        } catch (e) {
+            res.status(500).json({message: e.message})
+            }
     }
 
     async createClient(req, res) {
-        const newClient = await clientService.createClient(req.body)
-        res.json(newClient)
+        try {
+            const newClient = await clientService.createClient(req.body)
+            res.json(newClient)
+        } catch (e) {
+            res.status(500).json({ message: e.message })
+        }
     }
 
     async updateClient(req, res) {

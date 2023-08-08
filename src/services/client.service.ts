@@ -4,7 +4,8 @@ import AppDataSource from "../app.js";
 class clientService {
     async getClients() {
         const clientRepository = AppDataSource.getRepository(Client)
-        return await clientRepository.find()
+        const clients = await clientRepository.find()
+        return clients
       }
     
     async getOneClient(id) {
@@ -12,10 +13,11 @@ class clientService {
             throw new Error("Не указан ID");
           }
         const clientRepository = AppDataSource.getRepository(Client)
-        return await clientRepository
-            .createQueryBuilder("client")
-            .where("client.id = :id", { id })
-            .getOne()
+        const user = await clientRepository
+        .createQueryBuilder("client")
+        .where("client.id = :id", { id })
+        .getOne()
+        return user
     }
 
     async createClient(clientData) {
@@ -35,6 +37,8 @@ class clientService {
 
     async updateClient(id, clientData) {
         const clientRepository = AppDataSource.getRepository(Client);
+
+
         const queryBuilder = clientRepository.createQueryBuilder();
         queryBuilder.where('id = :id', { id });
 

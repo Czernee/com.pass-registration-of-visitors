@@ -1,7 +1,7 @@
-import { Client } from "../models/Client.js";
-import AppDataSource from "../app.js";
-import clientService from "../services/client.service.js";
-import { validationResult } from "express-validator";
+import { Client } from "../models/Client.js"
+import AppDataSource from "../app.js"
+import clientService from "../services/client.service.js"
+import { validationResult } from 'express-validator'
 
 class clientController {
     async getClients(req, res) {
@@ -19,29 +19,28 @@ class clientController {
     }
 
     async createClient(req, res) {
-        try {
-            const errors = validationResult(req)
-            const newClient = await clientService.createClient(req.body)
-            res.json(newClient)
-
-            if (!errors.isEmpty()) {
-                return res.status(400).json({errors: errors.array()})
-            } 
-            
-        } catch (e) {
-            res.status(500).json({ message: e.message })
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+          return res.status(400).json({ errors: errors.array() });
         }
+
+        const newClient = await clientService.createClient(req.body)
+        res.json(newClient)
     }
 
     async updateClient(req, res) {
         try {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+              return res.status(400).json({ errors: errors.array() });
+            }
+
             const updatedClient = await clientService.updateClient(req.params.id, req.body)
             return res.json(updatedClient)
         } catch (e) {
-            res.status(404).json({ message: e.message }) 
+            res.status(404).json({ message: e.message })
         }
     }
 }
 
 export default new clientController()
-

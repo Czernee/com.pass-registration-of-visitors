@@ -5,8 +5,12 @@ import { validationResult } from 'express-validator'
 
 class clientController {
     async getClients(req, res) {
-        const clients = await clientService.getClients();
-        res.json(clients);
+        try {
+            const clients = await clientService.getClients()
+            res.json(clients)
+        } catch (e) {
+            res.status(500).json({message: e.message})
+        }
       }
     
     async getOneClient(req, res) {
@@ -39,6 +43,30 @@ class clientController {
             return res.json(updatedClient)
         } catch (e) {
             res.status(404).json({ message: e.message })
+        }
+    }
+
+    async getStayingClients(req, res) {
+        try {
+            const stayingClients = await clientService.getStayingClients()
+            res.json(stayingClients)
+        } catch (e) {
+            res.status(500).json({message: e.message})  
+        }
+    }
+
+    async ifClientStaying(req, res) {
+        try {
+            const client = await clientService.ifClientStaying(req.params.id)
+
+            if (client) {
+                res.json({message: "Клиент еще в отеле"})
+            }
+            else {
+                res.json({message: "Клиент выехал"})
+            }
+        } catch (e) {
+            res.status(500).json({message: e.message})
         }
     }
 }

@@ -23,4 +23,7 @@ clientRouter.patch('/:id',
     check('departure').optional()
   ], clientController.updateClient)
 
+clientRouter.get('/user/staying', clientController.getStayingClients)  
+clientRouter.get('/user/staying/:id', clientController.ifClientStaying)
+
 export default clientRouter

@@ -10,7 +10,8 @@ class clientService {
     async getOneClient(id) {
         if (!id) {
             throw new Error("Не указан ID");
-          }
+        }
+
         const clientRepository = AppDataSource.getRepository(Client)
         return await clientRepository
         .createQueryBuilder("client")
@@ -43,6 +44,36 @@ class clientService {
 
         await clientRepository.save(client)
         return client
+    }
+
+    async getStayingClients() {
+        const clientRepository = AppDataSource.getRepository(Client)
+      
+        const today = new Date()
+        const formattedToday = today.toISOString().slice(0, 10)
+        
+        return await clientRepository
+          .createQueryBuilder('client')
+          .where(`client.arrival <= '${formattedToday}'`)
+          .andWhere(`client.departure >= '${formattedToday}'`)
+          .getMany()
+    }
+
+    async ifClientStaying(id) {
+        if (!id) {
+            throw new Error("Не указан ID");
+        }
+
+        const today = new Date()
+        const formattedToday = today.toISOString().slice(0, 10)
+
+        const clientRepository = AppDataSource.getRepository(Client)
+        return await clientRepository
+        .createQueryBuilder("client")
+        .where("client.id = :id", { id })
+        .andWhere(`client.arrival <= '${formattedToday}'`)
+        .andWhere(`client.departure >= '${formattedToday}'`)
+        .getOne()
     }
 }
 

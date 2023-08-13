@@ -3,6 +3,10 @@ import AppDataSource from "../app.js"
 import clientService from "../services/client.service.js"
 import { validationResult } from 'express-validator'
 
+function isClientStaying(client) {
+    return client !== null;
+}
+
 class clientController {
     async getClients(req, res) {
         try {
@@ -59,12 +63,13 @@ class clientController {
         try {
             const client = await clientService.ifClientStaying(req.params.id)
 
-            if (client) {
-                res.json({message: "Клиент еще в отеле"})
+            const stayInfo = { stay: isClientStaying(client), date: null }
+
+            if (stayInfo.stay) {
+                stayInfo.date = client.departure
             }
-            else {
-                res.json({message: "Клиент выехал"})
-            }
+
+            res.json(stayInfo)
         } catch (e) {
             res.status(500).json({message: e.message})
         }

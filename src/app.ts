@@ -7,7 +7,7 @@ import clientRouter from './routers/client.routers.js'
 
 const app = express()
 app.use(express.json())
-app.use('/api', clientRouter)
+app.use('/api/user', clientRouter)
 
 const PORT = 3000
 

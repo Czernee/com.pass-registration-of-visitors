@@ -49,8 +49,7 @@ class clientService {
     async getStayingClients() {
         const clientRepository = AppDataSource.getRepository(Client)
       
-        const today = new Date()
-        const formattedToday = today.toISOString().slice(0, 10)
+        const formattedToday = (new Date).toISOString().slice(0, 10)
         
         return await clientRepository
           .createQueryBuilder('client')
@@ -64,8 +63,7 @@ class clientService {
             throw new Error("Не указан ID");
         }
 
-        const today = new Date()
-        const formattedToday = today.toISOString().slice(0, 10)
+        const formattedToday = (new Date).toISOString().slice(0, 10)
 
         const clientRepository = AppDataSource.getRepository(Client)
         return await clientRepository

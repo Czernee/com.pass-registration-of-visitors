@@ -2,7 +2,7 @@
   "name": "com.pass",
   "version": "1.0.0",
   "description": "Дубликат задачи «Создание и настройка проекта микро-сервиса \"Учет посетителей\"»",
-  "main": "index.js",
+  "main": "app.ts",
   "scripts": {
     "prod:start": "npm run build && node build/app.js",
     "dev:server": "npx nodemon",
@@ -18,10 +18,14 @@
   "author": "Daniil Chernousov",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "express-handlebars": "^7.0.7",
-    "mongoose": "^7.3.4",
-    "path": "^0.12.7"
+    "express-validator": "^7.0.1",
+    "path": "^0.12.7",
+    "pg": "^8.11.1",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.3.17"
   },
   "devDependencies": {
     "@types/express": "^4.17.17",

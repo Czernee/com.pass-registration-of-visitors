@@ -1,5 +1,5 @@
-node_modules
-models
-creation.html
 .env
-index.js
+database.sql
+.prettierc
+.idea
+node_modules
